@@ -5,8 +5,11 @@ use piston_window::Transformed;
 use piston_window::{clear, rectangle, text, PistonWindow, Position, WindowSettings};
 use std::time::Instant;
 
+mod app;
 mod colours;
 mod layout;
+
+use app::App;
 
 fn main() {
     let now = Instant::now();
@@ -35,63 +38,17 @@ fn main() {
 
     let mut gcache = window.load_font("SourceCodePro.ttf").unwrap();
 
-    let mut box_contents = String::new();
+    let mut app = App::new();
 
     while let Some(event) = window.next() {
-        match &event {
-            Event::Input(ev, _) => match ev {
-                Input::Text(t) => box_contents += t,
-
-                Input::Button(ButtonArgs {
-                    state: ButtonState::Press,
-                    button: Button::Keyboard(Key::Backspace),
-                    ..
-                }) => {
-                    box_contents.pop();
-                }
-
-                _ => (),
-            },
-            _ => (),
+        if let Event::Input(ev, _) = &event {
+            app.on_input(ev);
         }
+
         window.draw_2d(&event, |context, graphics, device| {
             clear(colours::BACKGROUND, graphics);
 
-            let textbox_padding = 5.;
-            let textbox_height = 50.;
-
-            rectangle::Rectangle::new_round(colours::TEXT_BOX, 5.).draw(
-                [
-                    textbox_padding as f64,
-                    textbox_padding as f64,
-                    layout::WINDOW_DIMS.width as f64 - 2. * textbox_padding as f64,
-                    textbox_height as f64,
-                ],
-                &context.draw_state,
-                context.transform,
-                graphics,
-            );
-            text::Text::new_color([1.; 4], (textbox_height / 1.5) as u32)
-                .draw(
-                    &box_contents,
-                    &mut gcache,
-                    &context.draw_state,
-                    context.transform.trans(
-                        textbox_padding as f64 * 2.,
-                        textbox_height as f64 - textbox_padding,
-                    ),
-                    graphics,
-                )
-                .unwrap();
-            // text(
-            //     [1.0, 1.0, 1.0, 1.0],
-            //     2,
-            //     "aaaaa",
-            //     &mut gcache,
-            //     [[0.11, 0., -1.], [0., 0.11, 0.]],
-            //     graphics,
-            // )
-            // .unwrap();
+            app.render(&context, graphics, &mut gcache);
 
             // magic, see https://github.com/PistonDevelopers/piston_window/issues/258#issuecomment-514442002
             gcache.factory.encoder.flush(device);
