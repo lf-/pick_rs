@@ -6,5 +6,5 @@ pub const WINDOW_DIMS: Size = Size {
 
 pub const TEXTBOX_PADDING: f32 = 5.;
 pub const TEXTBOX_HEIGHT: f32 = 50.;
-pub const MAX_RESULTS: usize = 8;
+pub const MAX_RESULTS: usize = 10;
 pub const RESULT_FONT_SIZE: u32 = 24;

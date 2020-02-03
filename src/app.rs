@@ -4,9 +4,48 @@ use piston_window::{
     Glyphs, Input, Key, Transformed,
 };
 use std::cmp;
+use std::ops::Add;
 
 use crate::colours;
 use crate::layout::{MAX_RESULTS, RESULT_FONT_SIZE, TEXTBOX_HEIGHT, TEXTBOX_PADDING, WINDOW_DIMS};
+
+#[derive(PartialEq, PartialOrd)]
+struct Similarity(f64);
+
+impl Similarity {
+    fn new(val: f64) -> Similarity {
+        if val.is_nan() {
+            panic!("similarity score should never be NaN");
+        }
+        Similarity(val)
+    }
+}
+
+impl Add for Similarity {
+    type Output = Self;
+    fn add(self, other: Self) -> Self {
+        Self::new(self.0 + other.0)
+    }
+}
+impl Eq for Similarity {}
+impl Ord for Similarity {
+    fn cmp(&self, other: &Similarity) -> cmp::Ordering {
+        self.partial_cmp(other).unwrap()
+    }
+}
+
+/// Finds the similarity between two strings, with heavy weighting toward complete word matches within the strings
+/// Order of `needle` and `haystack` is important
+/// # Returns
+/// [`f64`] between 0. and 1.1 representing similarity
+fn fuzzy_similarity(needle: &str, haystack: &str) -> Similarity {
+    let base_similarity = Similarity(strsim::normalized_damerau_levenshtein(needle, haystack));
+    if haystack.split_whitespace().any(|e| e == needle) {
+        base_similarity + Similarity::new(0.1)
+    } else {
+        base_similarity
+    }
+}
 
 /// Finds the closest `n` strings to the `input` string in the collection `input`
 ///
@@ -16,7 +55,7 @@ fn find_closest<'a>(input: &str, options: &'a [String], n: usize) -> Vec<usize> 
     let mut distances: Vec<_> = options
         .iter()
         .enumerate()
-        .map(|(idx, elem)| (idx, strsim::normalized_damerau_levenshtein(input, elem)))
+        .map(|(idx, elem)| (idx, fuzzy_similarity(input, elem)))
         .collect();
 
     // sort by distance
