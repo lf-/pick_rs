@@ -1,10 +1,11 @@
+#![windows_subsystem = "windows"]
+
 use piston::window::Window;
 use piston_window::{clear, EventLoop, PistonWindow, WindowSettings};
 use sdl2::video::WindowPos;
 use sdl2_window::Sdl2Window;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
-use std::time::Instant;
 
 mod app;
 mod colours;
@@ -13,7 +14,6 @@ mod layout;
 use app::App;
 
 fn main() {
-    let now = Instant::now();
     let mut window: PistonWindow<Sdl2Window> =
         WindowSettings::new("Hello Piston!", layout::WINDOW_DIMS)
             .exit_on_esc(true)
@@ -23,14 +23,11 @@ fn main() {
 
     window.set_max_fps(60);
     window.set_ups(60);
-    println!("build window {}", now.elapsed().as_millis());
-    let now = Instant::now();
 
     window
         .window
         .window
         .set_position(WindowPos::Centered, WindowPos::Centered);
-    println!("center window {}", now.elapsed().as_millis());
 
     let mut gcache = window.load_font("FiraSans-Regular.ttf").unwrap();
 
