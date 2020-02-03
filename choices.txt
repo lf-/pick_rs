@@ -1,0 +1,83 @@
+Ͱ capital letter heta
+ͱ small letter heta
+Ͳ capital letter archaic sampi
+ͳ small letter archaic sampi
+Ͷ capital letter pamphylian digamma
+ͷ small letter pamphylian digamma
+Ϳ capital letter yot
+Α capital letter alpha
+Β capital letter beta
+Γ capital letter gamma
+Δ capital letter delta
+Ε capital letter epsilon
+Ζ capital letter zeta
+Η capital letter eta
+Θ capital letter theta
+Ι capital letter iota
+Κ capital letter kappa
+Λ capital letter lamda
+Μ capital letter mu
+Ν capital letter nu
+Ξ capital letter xi
+Ο capital letter omicron
+Π capital letter pi
+Ρ capital letter rho
+Σ capital letter sigma
+Τ capital letter tau
+Υ capital letter upsilon
+Φ capital letter phi
+Χ capital letter chi
+Ψ capital letter psi
+Ω capital letter omega
+α small letter alpha
+β small letter beta
+γ small letter gamma
+δ small letter delta
+ε small letter epsilon
+ζ small letter zeta
+η small letter eta
+θ small letter theta
+ι small letter iota
+κ small letter kappa
+λ small letter lamda
+μ small letter mu
+ν small letter nu
+ξ small letter xi
+ο small letter omicron
+π small letter pi
+ρ small letter rho
+ς small letter final sigma
+σ small letter sigma
+τ small letter tau
+υ small letter upsilon
+φ small letter phi
+χ small letter chi
+ψ small letter psi
+ω small letter omega
+Ϙ letter archaic koppa
+ϙ small letter archaic koppa
+Ϛ letter stigma
+ϛ small letter stigma
+Ϝ letter digamma
+ϝ small letter digamma
+Ϟ letter koppa
+ϟ small letter koppa
+Ϡ letter sampi
+ϡ small letter sampi
+ϳ letter yot
+Ϸ capital letter sho
+ϸ small letter sho
+Ϻ capital letter san
+ϻ small letter san
+ᴦ letter small capital gamma
+ᴧ letter small capital lamda
+ᴨ letter small capital pi
+ᴩ letter small capital rho
+ᴪ letter small capital psi
+ᵦ subscript small letter beta
+ᵧ subscript small letter gamma
+ᵨ subscript small letter rho
+ᵩ subscript small letter phi
+ᵪ subscript small letter chi
+℩ turned small letter iota
+ꭥ letter small capital omega

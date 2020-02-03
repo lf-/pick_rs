@@ -1,5 +1,7 @@
 use piston_window::types::Color;
+
 /// Takes in RGBA in hex and returns the colour in float format
+/// 0xRRGGBBAA => [R, G, B, A]
 macro_rules! hex_colour {
     ( $colour:expr ) => {
         [
@@ -11,5 +13,7 @@ macro_rules! hex_colour {
     };
 }
 
-pub const BACKGROUND: Color = hex_colour!(0x000000ff);
-pub const TEXT_BOX: Color = hex_colour!(0x555555ff);
+pub const BACKGROUND: Color = hex_colour!(0x00_00_00_ffu32);
+pub const TEXT_BOX: Color = hex_colour!(0x55_55_55_ffu32);
+pub const RESULTS: Color = hex_colour!(0xdd_dd_dd_ffu32);
+pub const SELECTED_RESULT: Color = hex_colour!(0x44_44_44_ffu32);

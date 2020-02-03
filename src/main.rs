@@ -1,8 +1,8 @@
 use glutin_window::GlutinWindow;
-use piston::input::{Button, ButtonArgs, ButtonState, Event, Input, Key};
 use piston::window::{AdvancedWindow, Window};
-use piston_window::Transformed;
-use piston_window::{clear, rectangle, text, PistonWindow, Position, WindowSettings};
+use piston_window::{clear, PistonWindow, Position, WindowSettings};
+use std::fs::File;
+use std::io::{BufRead, BufReader};
 use std::time::Instant;
 
 mod app;
@@ -36,13 +36,18 @@ fn main() {
     window.set_position(center);
     println!("center window {}", now.elapsed().as_millis());
 
-    let mut gcache = window.load_font("SourceCodePro.ttf").unwrap();
+    let mut gcache = window.load_font("FiraSans-Regular.ttf").unwrap();
 
-    let mut app = App::new();
+    let choices = BufReader::new(File::open("choices.txt").unwrap())
+        .lines()
+        .filter_map(|ln| ln.ok())
+        .collect::<Vec<String>>();
+
+    let mut app = App::new(choices);
 
     while let Some(event) = window.next() {
-        if let Event::Input(ev, _) = &event {
-            app.on_input(ev);
+        if app.on_event(&event) {
+            window.set_should_close(true);
         }
 
         window.draw_2d(&event, |context, graphics, device| {
@@ -54,5 +59,4 @@ fn main() {
             gcache.factory.encoder.flush(device);
         });
     }
-    println!("Hello, world!");
 }
