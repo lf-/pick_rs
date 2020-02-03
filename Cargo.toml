@@ -3,6 +3,7 @@ name = "pick_rs"
 version = "0.1.0"
 authors = ["lf- <lf-@users.noreply.github.com>"]
 edition = "2018"
+build = "build.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -22,7 +23,7 @@ piston-gfx_texture = "0.40.0"
 gfx_device_gl = "0.16.2"
 strsim = "0.10.0"
 clipboard = "0.5.0"
+sdl2 = "^0.32"
 
-
-[dependencies.pistoncore-glutin_window]
-  git = "https://github.com/PistonDevelopers/glutin_window"
+[dependencies.pistoncore-sdl2_window]
+  git = "https://github.com/PistonDevelopers/sdl2_window"
